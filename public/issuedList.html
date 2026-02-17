@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Issued Books</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .refresh-btn {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .refresh-btn:hover {
+            background-color: #219150;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 500px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .no-data {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            th, td {
+                font-size: 13px;
+                padding: 10px;
+            }
+             body {
+        align-items: flex-start;
+    }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Currently Issued Books</h2>
+
+    <button class="refresh-btn" onclick="loadIssuedBooks()">Refresh</button>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Book Code</th>
+                    <th>Return Date</th>
+                </tr>
+            </thead>
+            <tbody id="issuedTable"></tbody>
+        </table>
+    </div>
+
+    <div id="noData" class="no-data"></div>
+</div>
+
+<script>
+async function loadIssuedBooks() {
+
+    const response = await fetch("/issued");
+    const data = await response.json();
+
+    const table = document.getElementById("issuedTable");
+    const noData = document.getElementById("noData");
+
+    table.innerHTML = "";
+    noData.innerHTML = "";
+
+    if (data.length === 0) {
+        noData.innerHTML = "No books currently issued.";
+        return;
+    }
+
+    data.forEach(record => {
+        table.innerHTML += `
+            <tr>
+                <td>${record.username}</td>
+                <td>${record.book_code}</td>
+                <td>${record.return_date ? record.return_date.slice(0, 10) : ""}</td>
+            </tr>
+        `;
+    });
+}
+
+loadIssuedBooks();
+</script>
+
+</body>
+</html>

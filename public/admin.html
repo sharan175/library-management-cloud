@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .dashboard {
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #2c3e50;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 14px;
+            background: #27ae60;
+            color: white;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #219150;
+        }
+
+        @media (max-width: 480px) {
+            .dashboard {
+                padding: 25px 20px;
+            }
+
+            button {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+
+    <h2>Admin Dashboard</h2>
+
+    <button onclick="goTo('manageBooks.html')">
+        📚 Manage Books (Add / Remove)
+    </button>
+
+    <button onclick="goTo('issueBook.html')">
+        📖 Issue Book
+    </button>
+
+    <button onclick="goTo('issuedList.html')">
+        📋 Issued Book List
+    </button>
+
+    <button onclick="goTo('returnBook.html')">
+        🔄 De-Issue Book (Return)
+    </button>
+
+    <button onclick="logout()">
+        🚪 Logout
+    </button>
+
+</div>
+
+<script>
+function goTo(page) {
+    window.location.href = page;
+}
+
+function logout() {
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
