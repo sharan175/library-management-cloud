@@ -1,29 +1,17 @@
 require("dotenv").config();
 
 require("dotenv").config();
-
-console.log("DB_HOST:", process.env.DB_HOST);
-console.log("DB_USER:", process.env.DB_USER);
-console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
-console.log("DB_NAME:", process.env.DB_NAME);
-
 const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
 const session = require("express-session");
-
-
 const app = express();
-
-
 app.use(cors({
   origin: "http://localhost:4000",
   credentials: true
 }));
-
 app.use(express.json());
 app.use(express.static("public"));
-
 // Database connection
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -62,12 +50,6 @@ const returnRoute = require("./routes/return")(db);
 app.use("/return", returnRoute);
 const studentRoutes = require("./routes/student")(db);
 app.use("/student", studentRoutes);
-
-
-
-
-
-
 app.listen(process.env.PORT || 4000, () => {
   console.log("Server running");
 });
