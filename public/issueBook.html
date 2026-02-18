@@ -36,15 +36,33 @@
             color: #2c3e50;
         }
 
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            font-size: 14px;
-            transition: 0.3s;
-        }
+       input {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+/* Fix for date input overflow in mobile */
+/* Fix date input icon overflow */
+input[type="date"] {
+    position: relative;
+    padding-right: 40px;   /* create space for icon */
+    overflow: hidden;
+}
+
+/* Fix calendar icon position */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+
+
 
         input:focus {
             border-color: #27ae60;
@@ -77,6 +95,10 @@
             button {
                 font-size: 13px;
             }
+            input {
+    font-size: 16px; /* prevents zoom-in issue on iOS */
+}
+
         }
     </style>
 </head>
