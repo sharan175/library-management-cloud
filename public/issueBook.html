@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Issue Book</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+       input {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+/* Fix for date input overflow in mobile */
+/* Fix date input icon overflow */
+input[type="date"] {
+    position: relative;
+    padding-right: 40px;   /* create space for icon */
+    overflow: hidden;
+}
+
+/* Fix calendar icon position */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+
+
+
+        input:focus {
+            border-color: #27ae60;
+            outline: none;
+            box-shadow: 0 0 5px rgba(39, 174, 96, 0.3);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #219150;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px 20px;
+            }
+
+            button {
+                font-size: 13px;
+            }
+            input {
+    font-size: 16px; /* prevents zoom-in issue on iOS */
+}
+/* iPhone date input fix */
+input[type="date"] {
+    font-size: 14px;
+    padding: 10px;
+    height: 40px;
+}
+
+
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h3>Issue Book</h3>
+
+    <input type="text" id="username" placeholder="Username">
+    <input type="text" id="book_code" placeholder="Book Code">
+    <input type="date" id="borrow_date">
+    <input type="date" id="return_date">
+
+    <button onclick="issueBook()">Issue Book</button>
+</div>
+
+<script>
+async function issueBook() {
+
+    const username = document.getElementById("username").value;
+    const book_code = document.getElementById("book_code").value;
+    const borrow_date = document.getElementById("borrow_date").value;
+    const return_date = document.getElementById("return_date").value;
+
+    const response = await fetch("/issue", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            username,
+            book_code,
+            borrow_date,
+            return_date
+        })
+    });
+
+    const data = await response.json();
+    alert(data.message || data.error);
+}
+</script>
+
+</body>
+</html>
