@@ -27,7 +27,7 @@ db.connect((err) => {
   }
 });
 app.use(session({
-    secret: "library_secret_key",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: { secure: false }
@@ -48,6 +48,6 @@ const returnRoute = require("./routes/return")(db);
 app.use("/return", returnRoute);
 const studentRoutes = require("./routes/student")(db);
 app.use("/student", studentRoutes);
-app.listen(process.env.PORT || 4000, () => {
+app.listen(process.env.PORT, () => {
   console.log("Server running");
 });
