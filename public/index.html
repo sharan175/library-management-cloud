@@ -1,146 +1,201 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student Login</title>
+  <title>Student Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
+    .container {
+      width: 100%;
+      max-width: 400px;
+      background: #ffffff;
+      padding: 28px 24px;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    }
 
-        .container {
-            width: 100%;
-            max-width: 400px;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
+    h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2c3e50;
+      font-weight: 600;
+    }
 
-        h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #2c3e50;
-        }
+    .form-group {
+      margin-bottom: 14px;
+    }
 
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            font-size: 14px;
-            transition: 0.3s;
-        }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 13px;
+      color: #555;
+    }
 
-        input:focus {
-            border-color: #27ae60;
-            outline: none;
-            box-shadow: 0 0 5px rgba(39,174,96,0.3);
-        }
+    input {
+      width: 100%;
+      padding: 11px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      transition: 0.2s;
+    }
 
-        button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            background: #27ae60;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+    input:focus {
+      border-color: #27ae60;
+      outline: none;
+      box-shadow: 0 0 4px rgba(39, 174, 96, 0.2);
+    }
 
-        button:hover {
-            background: #219150;
-        }
+    .error-box {
+      display: none;
+      background: #fdecea;
+      border: 1px solid #f5c6cb;
+      color: #c0392b;
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
 
-        .links {
-            text-align: center;
-            margin-top: 20px;
-        }
+    .error-box.show {
+      display: block;
+    }
 
-        .links a {
-            text-decoration: none;
-            display: block;
-            margin-top: 8px;
-            font-size: 14px;
-            color: #2c3e50;
-        }
+    button {
+      width: 100%;
+      padding: 11px;
+      margin-top: 10px;
+      background: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
-        .links a:hover {
-            text-decoration: underline;
-        }
+    button:hover {
+      background: #219150;
+    }
 
-        .admin-link {
-            font-weight: bold;
-        }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
 
-        @media (max-width: 480px) {
-            .container {
-                padding: 25px 20px;
-            }
-        }
-    </style>
+    .links {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 13px;
+    }
+
+    .links a {
+      display: block;
+      margin-top: 6px;
+      text-decoration: none;
+      color: #2c3e50;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 24px 18px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
 <div class="container">
-    <h2>Student Login</h2>
+  <h3>Student Login</h3>
 
-    <form id="loginForm">
-        <input type="text" id="username" placeholder="Username" required>
-        <input type="password" id="password" placeholder="Password" required>
-        <button type="submit">Login</button>
-    </form>
+  <div class="error-box" id="errorBox"></div>
 
-    <div class="links">
-        <a href="signup.html">Don't have an account? Sign Up</a>
-        <a href="adminLogin.html" class="admin-link">Admin Login</a>
+  <form id="loginForm">
+
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" id="username" required>
     </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="password" required>
+    </div>
+
+    <button type="submit" id="submitBtn">Login</button>
+  </form>
+
+  <div class="links">
+    <a href="signup.html">Don't have an account? Sign Up</a>
+    <a href="adminLogin.html">Admin Login</a>
+  </div>
 </div>
 
 <script>
-document.getElementById("loginForm").addEventListener("submit", async function(event) {
-    event.preventDefault();
+function showError(msg) {
+  const box = document.getElementById("errorBox");
+  box.textContent = msg;
+  box.classList.add("show");
+}
 
-    const username = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value.trim();
+function hideError() {
+  document.getElementById("errorBox").classList.remove("show");
+}
 
-    try {
-        const response = await fetch("/auth/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password })
-        });
+document.getElementById("loginForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  hideError();
 
-        const data = await response.json();
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const btn = document.getElementById("submitBtn");
 
-        if (response.status === 200) {
-            alert("Login successful!");
-            window.location.href = "student.html";
-        } else {
-            alert(data.error || "Invalid credentials");
-        }
+  btn.disabled = true;
+  btn.textContent = "Logging in...";
 
-    } catch (error) {
-        alert("Server error");
-        console.error(error);
+  try {
+    const response = await fetch("/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password })
+    });
+
+    const data = await response.json();
+
+    if (response.status === 200) {
+      btn.textContent = "Success";
+      setTimeout(() => window.location.href = "student.html", 800);
+    } else {
+      showError(data.error || "Invalid credentials");
+      btn.disabled = false;
+      btn.textContent = "Login";
     }
+  } catch (err) {
+    showError("Server error");
+    btn.disabled = false;
+    btn.textContent = "Login";
+  }
 });
 </script>
 
